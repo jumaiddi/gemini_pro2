@@ -112,11 +112,11 @@ if st.button("Pata taarifa"):
     else:
         with st.spinner("Mchakato..."):
             try:
-                prompt=f"{prompt} ,Naomba majibu yawe kwa kiswahili fasaha na wakati unatoa majibu usiweke background ya blue "
+                prompt=f"{prompt} ,Naomba majibu yawe kwa kiswahili fasaha"
                 response_text = process_pdf_and_query(prompt)
                 # st.subheader("Pata taarifa")
                 # st.info(response_text)
-                colored_text = f"<p style='color:white; background-color:darkblue; padding:10px; border-radius:5px;'>{response_text}</p>"
+                colored_text = f"<p style='color:white; background-color:black padding:10px; border-radius:5px;'>{response_text}</p>"
                 st.markdown(colored_text, unsafe_allow_html=True)
                 
             except Exception as e:
