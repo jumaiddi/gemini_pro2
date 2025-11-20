@@ -3,7 +3,7 @@ import base64
 from pathlib import Path
 
 # ... soma data ya PDF ...
-pdf_path = Path("AZANIA.pdf")
+pdf_path = Path("azabrothers.pdf")
 pdf_bytes = pdf_path.read_bytes()
 base64_string = base64.b64encode(pdf_bytes).decode("utf-8")
 
