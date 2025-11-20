@@ -141,7 +141,10 @@ if st.button("Pata taarifa"):
                 response_text = process_pdf_and_query(prompt)
                 
                 # st.subheader("Pata taarifa")
-                st.info(response_text)
+                # st.info(response_text)
+                
+                colored_text = f"<p style='color:white; background-color:darkblue; padding:10px; border-radius:5px;'>{response_text}</p>"
+                st.markdown(colored_text, unsafe_allow_html=True)
                 
             except Exception as e:
                 st.error(f"Kosa limetokea wakati wa kuwasiliana na API: {e}")
