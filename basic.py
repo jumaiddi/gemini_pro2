@@ -71,51 +71,21 @@ response=client.models.generate_content(
 
 print(response.text)
 
-# Pakia .env file (kwa API key)
-load_dotenv()
-
-# **********************************************
-# 1. Usanidi wa Gemini Client
-# **********************************************
-try:
-    # Tumia GEMINI_API_KEY au GOOGLE_API_KEY kutoka .env
-   client = genai.Client(api_key=key) 
-except Exception as e:
-    st.error("Tatizo la kuunganisha na Gemini API. Hakikisha umeweka GEMINI_API_KEY kwenye faili la .env.")
-    st.stop()
-
-
-# **********************************************
-# 2. Kazi ya Kuchakata PDF
-# **********************************************
+load_dotenv() 
 def process_pdf_and_query(user_prompt):
-    
-    # base64_data = st.secrets["AZANIA_PDF"]
-    
-    # 2. Badilisha Base64 kurudi kwenye data ya binary (bytes)
-    # doc_dat = base64.b64decode(base64_data)
 
     pdf=types.Part.from_bytes(
         data=doc_dat,
         mime_type="application/pdf"
     )
-
-    # Unda orodha ya contents: PDF + Prompt
-    # Kumbuka: Prompt yako inahitaji kuwa kwenye Part tofauti (maandishi)
     contents = [pdf, user_prompt]
 
-    # Omba jibu kutoka kwa Model
     response = client.models.generate_content(
         model="gemini-2.5-flash",
         contents=contents
     )
 
     return response.text
-
-
-# **********************************************
-# 3. Kiolesura cha Streamlit (UI)
-# **********************************************
 
 st.markdown("<h5>📄 Mfumo wa kupata taarifa za AzaBrothers</h5>", unsafe_allow_html=True)
 
@@ -133,9 +103,9 @@ st.markdown("<h5>📄 Mfumo wa kupata taarifa za AzaBrothers</h5>", unsafe_allow
 st.markdown("###### Andika Hitajio Lako") 
 
 prompt = st.text_area(
-    "Andika hitajio lako", # Hii sasa inakuwa label rahisi ya ndani
+    "Andika hitajio lako", 
     height=10,
-    label_visibility="collapsed" # Inaficha label ya ndani ili kuona H6 tu
+    label_visibility="collapsed" 
 )
 
 if st.button("Pata taarifa"):
@@ -144,12 +114,9 @@ if st.button("Pata taarifa"):
     else:
         with st.spinner("Mchakato..."):
             try:
-                # Ita kazi ya kuchakata na kupata jibu
                 response_text = process_pdf_and_query(prompt)
-                
                 # st.subheader("Pata taarifa")
                 # st.info(response_text)
-                
                 colored_text = f"<p style='color:white; background-color:darkblue; padding:10px; border-radius:5px;'>{response_text}</p>"
                 st.markdown(colored_text, unsafe_allow_html=True)
                 
