@@ -6,20 +6,21 @@ from PIL import Image
 from pathlib import Path
 import streamlit as st
 import base64
+from google.genai import errors
 
 load_dotenv() 
 
 api_key=st.secrets["GOOGLE_API_KEY"]
 api_key1=st.secrets["GOOGLE_API_KEY1"]
 api_key2=st.secrets["GOOGLE_API_KEY2"]
-client = genai.Client(api_key=api_key) 
-
-if client is None:
-    client=genai.Client(api_key=api_key1)
-if client is None:
-    client=genai.Client(api_key=api_key2)
-for model in client.models.list():
-    print(model.name)
+for key in [api_key,api_key1,api_key2]:
+    try:
+        key=key
+        client = genai.Client(api_key=key)
+    except errors.APIError as e:
+        continue
+# for model in client.models.list():
+#     print(model.name)
     
 # prompt=input("Inter input: ")
 # image=Image.open("../rag_demo/image01.png")
@@ -78,7 +79,7 @@ load_dotenv()
 # **********************************************
 try:
     # Tumia GEMINI_API_KEY au GOOGLE_API_KEY kutoka .env
-   client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY")) 
+   client = genai.Client(api_key=key) 
 except Exception as e:
     st.error("Tatizo la kuunganisha na Gemini API. Hakikisha umeweka GEMINI_API_KEY kwenye faili la .env.")
     st.stop()
