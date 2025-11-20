@@ -112,7 +112,7 @@ if st.button("Pata taarifa"):
     else:
         with st.spinner("Mchakato..."):
             try:
-                prompt=f"{prompt} ,Naomba majibu yawe kwa kiswahili fasaha"
+                prompt=f"{prompt} ,Naomba majibu yawe kwa kiswahili fasaha na wakati unatoa majibu usiweke background ya blue "
                 response_text = process_pdf_and_query(prompt)
                 # st.subheader("Pata taarifa")
                 # st.info(response_text)
