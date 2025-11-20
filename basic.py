@@ -110,7 +110,7 @@ def process_pdf_and_query(user_prompt):
 # 3. Kiolesura cha Streamlit (UI)
 # **********************************************
 
-st.markdown("<h5>📄 Mfumo wa kupata taarifa za kuhusu AzaBrothers</h5>", unsafe_allow_html=True)
+st.markdown("<h5>📄 Mfumo wa kupata taarifa za AzaBrothers</h5>", unsafe_allow_html=True)
 
 # Eneo la kupakia faili
 # uploaded_file = st.file_uploader(
