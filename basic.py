@@ -7,11 +7,17 @@ from pathlib import Path
 import streamlit as st
 import base64
 
-load_dotenv()
+load_dotenv() 
 
 api_key=st.secrets["GOOGLE_API_KEY1"]
+api_key1=st.secrets["GOOGLE_API_KEY"]
+api_key2=st.secrets["GOOGLE_API_KEY2"]
 client = genai.Client(api_key=api_key) 
 
+if client is None:
+    client=genai.Client(api_key=api_key1)
+if client is None:
+    client=genai.Client(api_key=api_key2)
 for model in client.models.list():
     print(model.name)
     
